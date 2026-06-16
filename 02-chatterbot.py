@@ -1,21 +1,9 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 
-from spacy.cli import download
-
-download("en_core_web_sm")
-
-from chatterbot import ChatBot
-from chatterbot.trainers import ListTrainer
-
-from spacy.cli import download
-
-#download("en_core_web_sm")
-
-class ENGSM:
-    ISO_639_1 = 'en_core_web_sm'
-
-chatbot = ChatBot("BotTw", tagger_language=ENGSM)
+chatbot = ChatBot(
+    "BotTw"
+)
 
 sentenca = [
     "opa",
@@ -33,10 +21,13 @@ treino.train(sentenca)
 
 while True:
     mensagem = input("Envie uma mensagem \n")
+
     if mensagem.lower() == "sair":
         break
+
     resposta = chatbot.get_response(mensagem)
+
     if float(resposta.confidence) > 0.4:
-        print("BotTw: " , resposta)
+        print("BotTw:", resposta)
     else:
         print("BotTw: Ainda não sei responder essa pergunta")
